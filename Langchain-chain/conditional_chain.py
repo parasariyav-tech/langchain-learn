@@ -15,7 +15,6 @@ model = ChatOpenAI()
 parser = StrOutputParser()
 
 class Feedback(BaseModel):
-
     sentiment: Literal['positive', 'negative'] = Field(description='Give the sentiment of the feedback')
 
 parser2 = PydanticOutputParser(pydantic_object=Feedback)
