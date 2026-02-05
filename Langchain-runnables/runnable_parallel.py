@@ -2,17 +2,17 @@ from langchain_openai import ChatOpenAI
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from dotenv import load_dotenv
-from langchain.schema.runnable import RunnableSequence, RunnableParallel
+from langchain_core.runnables import RunnableSequence, RunnableParallel
 
 load_dotenv()
 
 prompt1 = PromptTemplate(
-    template='Generate a tweet about {topic}',
+    template='Generate a tweet about {topic} following tweet word limit',
     input_variables=['topic']
 )
 
 prompt2 = PromptTemplate(
-    template='Generate a Linkedin post about {topic}',
+    template='Generate a Linkedin post about {topic} in 100 words',
     input_variables=['topic']
 )
 
@@ -25,7 +25,7 @@ parallel_chain = RunnableParallel({
     'linkedin': RunnableSequence(prompt2, model, parser)
 })
 
-result = parallel_chain.invoke({'topic':'AI'})
+result = parallel_chain.invoke({'topic':'KarmaFarming'})
 
 print(result['tweet'])
 print(result['linkedin'])
