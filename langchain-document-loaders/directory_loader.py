@@ -1,8 +1,12 @@
-from langchain_community.document_loaders import CSVLoader
+from langchain_community.document_loaders import DirectoryLoader, PyPDFLoader
 
-loader = CSVLoader(file_path='Social_Network_Ads.csv')
+loader = DirectoryLoader(
+    path='books',
+    glob='*.pdf',
+    loader_cls=PyPDFLoader
+)
 
-docs = loader.load()
+docs = loader.lazy_load()
 
-print(len(docs))
-print(docs[1])
+for document in docs:
+    print(document.metadata)
