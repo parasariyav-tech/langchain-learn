@@ -19,4 +19,4 @@ Terrorism is a big danger to peace and safety. It causes harm to people and crea
 docs = text_splitter.create_documents([sample])
 print(len(docs))
 print(docs)
-
+ 
